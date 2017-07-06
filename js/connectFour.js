@@ -14,6 +14,10 @@ var winner = '';
 var isCurrentPlayerRed = true;
 var target = 4;
 
+function checkIfDraw() {
+
+}
+
 function checkVertical(row, col) {
     var count = 0;
     if (cells[row][col] != '') {
@@ -75,6 +79,9 @@ function checkDiagonalLeft(row, col) {
 }
 
 function checkIfCompleted() {
+
+    var moveCtr = 0;
+
     for (var row = 0; row < cells.length; row++) {
         for (var col = 0; col < cells[row].length; col++) {
             if (row + target < cells[row].length) {
@@ -89,7 +96,15 @@ function checkIfCompleted() {
             if (row + target < cells[row].length && col + target - 1 <= cells.length) {
                 checkDiagonalRight(row, col);
             }
+
+            if (cells[row][col] != '') {
+                moveCtr++;
+            }
         }
+    }
+
+    if (moveCtr == 42) {
+        winner = 'draw';
     }
 }
 
@@ -102,6 +117,12 @@ function checkWinner() {
         $('#yellow_wins_text').show();
         $('#red_turn_text').hide();
         $('#yellow_turn_text').hide();
+    } else if (winner == 'draw') {
+        $('#red_wins_text').hide();
+        $('#red_turn_text').hide();
+        $('#yellow_wins_text').hide();
+        $('#yellow_turn_text').hide();
+        $('#draw_text').show();
     }
 }
 
@@ -121,8 +142,9 @@ function reset() {
 
     $('#red_wins_text').hide();
     $('#red_turn_text').show();
+    $('#yellow_wins_text').hide();
     $('#yellow_turn_text').hide();
-    $('#yellow_turn_text').hide();
+    $('#draw_text').hide();
 }
 
 function updateBoard(col, color) {
