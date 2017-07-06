@@ -124,7 +124,22 @@
         }
     }
 
-    function reset() {
+    function updateBoard(col, color) {
+
+        for (var row = 0; row < cells.length; row++) {
+            if (cells[row][col] == '') {
+
+                cells[row][col] = color;
+                $('#r' + row + 'c' + col).removeClass('white').addClass(color);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    c4.reset = function() {
 
         isCurrentPlayerRed = true;
         winner = '';
@@ -143,21 +158,6 @@
         $('#yellow_wins_text').hide();
         $('#yellow_turn_text').hide();
         $('#draw_text').hide();
-    }
-
-    function updateBoard(col, color) {
-
-        for (var row = 0; row < cells.length; row++) {
-            if (cells[row][col] == '') {
-
-                cells[row][col] = color;
-                $('#r' + row + 'c' + col).removeClass('white').addClass(color);
-
-                return true;
-            }
-        }
-
-        return false;
     }
 
     c4.onCircleClick = function (row, col) {
