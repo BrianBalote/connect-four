@@ -105,7 +105,7 @@ function checkWinner() {
     }
 }
 
-function hardReset() {
+function reset() {
 
     isCurrentPlayerRed = true;
     winner = '';
